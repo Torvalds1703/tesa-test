@@ -1,5 +1,7 @@
 package com.example.sweater.entity;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 import javax.persistence.*;
 
 @Entity
@@ -7,6 +9,7 @@ public class Message {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
+
     private String text;
     private String tag;
     @ManyToOne(fetch = FetchType.EAGER)
