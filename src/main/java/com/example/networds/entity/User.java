@@ -1,6 +1,6 @@
-package com.example.sweater.entity;
+package com.example.networds.entity;
 
-import com.example.sweater.entity.enums.Role;
+import com.example.networds.entity.enums.Role;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 

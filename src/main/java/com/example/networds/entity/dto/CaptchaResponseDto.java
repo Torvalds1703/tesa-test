@@ -1,4 +1,4 @@
-package com.example.sweater.entity.dto;
+package com.example.networds.entity.dto;
 
 import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;

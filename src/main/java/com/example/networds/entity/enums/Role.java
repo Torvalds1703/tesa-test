@@ -1,4 +1,4 @@
-package com.example.sweater.entity.enums;
+package com.example.networds.entity.enums;
 
 import org.springframework.security.core.GrantedAuthority;
 

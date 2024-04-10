@@ -1,4 +1,4 @@
-package com.example.sweater.entity;
+package com.example.networds.entity;
 
 import org.hibernate.validator.constraints.Length;
 

@@ -1,8 +1,8 @@
-package com.example.sweater.service;
+package com.example.networds.service;
 
-import com.example.sweater.entity.User;
-import com.example.sweater.entity.enums.Role;
-import com.example.sweater.repository.UserRepository;
+import com.example.networds.entity.User;
+import com.example.networds.entity.enums.Role;
+import com.example.networds.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

@@ -1,7 +1,6 @@
-package com.example.sweater.controller;
+package com.example.networds.controller;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 

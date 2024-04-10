@@ -1,8 +1,8 @@
-package com.example.sweater.controller;
+package com.example.networds.controller;
 
-import com.example.sweater.entity.User;
-import com.example.sweater.entity.enums.Role;
-import com.example.sweater.service.UserService;
+import com.example.networds.entity.User;
+import com.example.networds.entity.enums.Role;
+import com.example.networds.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;

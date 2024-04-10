@@ -2,7 +2,6 @@
     Message editor
 </a>
 <div class="collapse <#if message??>show</#if>" id="collapseExample">
-    <#if message??>
     <div class="form-group mt-3">
         <form method="post" enctype="multipart/form-data">
             <div class="form-group">
@@ -37,5 +36,4 @@
 
         </form>
     </div>
-    </#if>
 </div>
