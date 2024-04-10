@@ -14,7 +14,7 @@
                 <div>
                     <a href="/user-messages/${message.author.id}" class="me-auto">${message.authorName}</a>
                 </div>
-                <div style="margin-left: 90px;">
+                <div style="margin-left: 30%;">
                     <#if message.author.id == currentUserId>
                         <a class="btn btn-primary" href="/user-messages/${message.author.id}?message=${message.id}">
                             Edit
