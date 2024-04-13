@@ -1,8 +1,7 @@
 <#include "security.ftlh">
 <#import "login.ftlh" as l>
 
-
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav  class="navbar navbar-expand-lg navbar-light bg-light navbar-expand-lg static-top" >
     <a class="navbar-brand" href="/">NetWords</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -34,7 +33,7 @@
 
         </ul>
 
-        <div class="navbar-text mr-3"><#if user??>${name}<#else>Please, login</#if></div>
+        <div  class="navbar-text ml-auto mr-3"><#if user??>${name}<#else>Please, login</#if></div>
         <@l.logout />
     </div>
 </nav>

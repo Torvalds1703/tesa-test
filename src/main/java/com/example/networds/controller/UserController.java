@@ -2,6 +2,7 @@ package com.example.networds.controller;
 
 import com.example.networds.entity.User;
 import com.example.networds.entity.enums.Role;
+import com.example.networds.service.MessageService;
 import com.example.networds.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -105,7 +106,5 @@ public class UserController {
 
         return "subscriptions";
     }
-
-
 
 }

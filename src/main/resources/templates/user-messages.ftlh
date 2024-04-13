@@ -1,44 +1,47 @@
 <#import "parts/common.ftlh" as c>
-
+<#include "parts/security.ftlh">
 <@c.page>
-    <h3>${userChannel.username}</h3>
-    <#if !isCurrentUser>
-        <#if isSubscriber>
-            <a class="btn btn-success" href="/user/unsubscribe/${userChannel.id}">Unsubscribe</a>
-        <#else>
-            <a class="btn btn-dark" href="/user/subscribe/${userChannel.id}">Subscribe</a>
-        </#if>
-    </#if>
-    <div>
-        <div class="container my-3">
-            <div class="row">
-                <div class="col">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="card-title">Subscriptions</div>
-                            <h3 class="card-text">
-                                <a href="/user/subscriptions/${userChannel.id}/list">${subscriptionsCount}</a>
-                            </h3>
-                        </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="card h-100">
+                    <div class="card-body d-flex justify-content-between align-items-center">
+                        <h4>${userChannel.username}</h4>
+                        <#if !isCurrentUser>
+                            <#if isSubscriber>
+                                <a class="btn btn-dark" href="/user/unsubscribe/${userChannel.id}">Unsubscribe</a>
+                            <#else>
+                                <a class="btn btn-success" href="/user/subscribe/${userChannel.id}">Subscribe</a>
+                            </#if>
+                        </#if>
                     </div>
                 </div>
-                <div class="col">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="card-title">Subscribers</div>
-                            <h3 class="card-text">
-                                <a href="/user/subscribers/${userChannel.id}/list">${subscribersCount}</a>
-                            </h3>
-                        </div>
+            </div>
+            <div class="col">
+                <div class="card h-100">
+                    <div class="card-body d-flex justify-content-between align-items-center">
+                        <div><h5>Subscriptions</h5></div>
+                        <h5><a href="/user/subscriptions/${userChannel.id}/list">${subscriptionsCount}</a></h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card h-100">
+                    <div class="card-body d-flex justify-content-between align-items-center">
+                        <div><h5>Subscribers</h5></div>
+                        <h5><a href="/user/subscribers/${userChannel.id}/list">${subscribersCount}</a></h5>
                     </div>
                 </div>
             </div>
         </div>
-
     </div>
-    <#if isCurrentUser>
+
+    <br>
+    <#if isCurrentUser && message??>
         <#include "parts/message-edit.ftlh"/>
     </#if>
 
 <#include "parts/message-list.ftlh" />
 </@c.page>
+

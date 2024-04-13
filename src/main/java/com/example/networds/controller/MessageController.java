@@ -2,8 +2,9 @@ package com.example.networds.controller;
 
 import com.example.networds.entity.Message;
 import com.example.networds.entity.User;
+import com.example.networds.entity.dto.MessageDto;
 import com.example.networds.repository.MessageRepository;
-import net.bytebuddy.TypeCache;
+import com.example.networds.service.MessageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
@@ -25,13 +26,15 @@ import javax.validation.Valid;
 import java.io.File;
 import java.io.IOException;
 import java.util.Map;
-import java.util.Set;
 import java.util.UUID;
 
 @Controller
-public class MainController {
+public class MessageController {
     @Autowired
     private MessageRepository messageRepository;
+
+    @Autowired
+    private MessageService messageService;
 
     @Value("${upload.path}")
     private String uploadPath;
@@ -50,11 +53,7 @@ public class MainController {
     ) {
         Page<Message> page;
 
-        if (filter != null && !filter.isEmpty()) {
-            page = messageRepository.findByTag(filter, pageable);
-        } else {
-            page = messageRepository.findAll(pageable);
-        }
+        page = messageService.messageList(pageable, filter);
 
         model.addAttribute("page", page);
         model.addAttribute("url", "/main");
@@ -91,6 +90,8 @@ public class MainController {
 
         model.addAttribute("page", messageRepository.findAll(pageable));
         model.addAttribute("url", "/main");
+        model.addAttribute("message", message);
+        model.addAttribute("message", null);
 
         return "main";
     }

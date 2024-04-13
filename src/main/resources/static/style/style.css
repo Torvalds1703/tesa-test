@@ -1,0 +1,14 @@
+.captcha-container {
+    width: 100%;
+    overflow: hidden; /* чтобы избежать выхода за границы */
+}
+
+.g-recaptcha {
+    width: 100%;
+}
+
+
+
+
+
+
