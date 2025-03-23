@@ -45,7 +45,7 @@ public class User implements UserDetails {
     private Set<Role> roles;
 
     @OneToMany(mappedBy = "author", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<Message> messages;
+    private Set<Task> tasks;
 
     @ManyToMany
     @JoinTable(
@@ -161,12 +161,12 @@ public class User implements UserDetails {
         this.activationCode = activationCode;
     }
 
-    public Set<Message> getMessages() {
-        return messages;
+    public Set<Task> getMessages() {
+        return tasks;
     }
 
-    public void setMessages(Set<Message> messages) {
-        this.messages = messages;
+    public void setMessages(Set<Task> tasks) {
+        this.tasks = tasks;
     }
 
     public Set<User> getSubscribers() {

@@ -18,3 +18,4 @@
 
 </@c.page>
 
+<#include "parts/footer.ftlh"/>

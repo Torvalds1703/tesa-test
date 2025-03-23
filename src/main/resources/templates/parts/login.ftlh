@@ -16,7 +16,7 @@
                     <form action="${path}" method="post">
                         <div class="text-center">
                             <div>
-                                <img src="static/images/logo.png" alt="Image" height="55" onerror="this.style.display='none';"><br><br>
+                                <img src="static/images/LOGO TESA.png" alt="Image" height="55" onerror="this.style.display='LOGO IN DEV';"><br><br>
                             </div>
                             <div>
                                 <#if isRegisterForm> <h5>Registration form</h5><#else><h5>Login form</h5></#if><br>

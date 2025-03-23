@@ -4,6 +4,6 @@
 
 
 <@c.page>
-    ${message?ifExists}
+    ${task?ifExists}
     <@l.login "/registration" true />
 </@c.page>

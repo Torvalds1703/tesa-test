@@ -1,6 +1,6 @@
 package com.example.networds.entity.dto;
 
-import com.example.networds.entity.Message;
+import com.example.networds.entity.Task;
 import com.example.networds.entity.User;
 
 public class MessageDto {
@@ -12,12 +12,12 @@ public class MessageDto {
     private Long likes;
     private Boolean meLiked;
 
-    public MessageDto(Message message, Long likes, Boolean meLiked) {
-        this.id = message.getId();
-        this.text = message.getText();
-        this.tag = message.getTag();
-        this.author = message.getAuthor();
-        this.filename = message.getFilename();
+    public MessageDto(Task task, Long likes, Boolean meLiked) {
+        this.id = task.getId();
+        this.text = task.getText();
+        this.tag = task.getTag();
+        this.author = task.getAuthor();
+        this.filename = task.getFilename();
         this.likes = likes;
         this.meLiked = meLiked;
     }

@@ -1,6 +1,6 @@
 create sequence hibernate_sequence start 2 increment 1;
 
-create table message (
+create table task (
     id int8 not null,
     filename varchar(255),
     tag varchar(255),
@@ -25,7 +25,7 @@ create table users (
     primary key (id)
 );
 
-alter table if exists message
+alter table if exists task
     add constraint message_user_fk
     foreign key (user_id) references users;
 

@@ -2,25 +2,25 @@
 <#import "pager.ftlh" as p>
 <div style="min-height: 100vh;">
     <div class="card-columns" >
-        <#list page.content as message>
+        <#list page.content as task>
             <div class="card my-3">
-                <#if message.filename??>
-                    <img src="/img/${message.filename}" class="card-img-top">
+                <#if task.filename??>
+                    <img src="/img/${task.filename}" class="card-img-top">
                 </#if>
                 <div class="m-2">
-                    <span>${message.text}</span><br/>
-                    <i>#${message.tag}</i>
+                    <span>${task.text}</span><br/>
+                    <i>#${task.tag}</i>
                 </div>
                 <div class="card-footer text-muted clearfix d-flex justify-content-between">
                     <div>
-                        <a href="/user-messages/${message.author.id}" class="me-auto">${message.authorName}</a>
+                        <a href="/user-tasks/${task.author.id}" class="me-auto">${task.authorName}</a>
                     </div>
                     <div style="margin-left: 30%;">
-                        <#if message.author.id == currentUserId>
-                            <a class="btn btn-primary" href="/user-messages/${message.author.id}?message=${message.id}">
+                        <#if task.author.id == currentUserId>
+                            <a class="btn btn-primary" href="/user-tasks/${task.author.id}?task=${task.id}">
                                 Edit
                             </a>
-                            <a class="btn btn-danger" href="/del-user-messages/${message.author.id}?message=${message.id}">
+                            <a class="btn btn-danger" href="/del-user-tasks/${task.author.id}?task=${task.id}">
                                 Delete
                             </a>
                         </#if>
@@ -29,7 +29,7 @@
 
             </div>
         <#else>
-            No message
+            No task
         </#list>
     </div>
 

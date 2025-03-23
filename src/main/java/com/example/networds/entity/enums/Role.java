@@ -3,7 +3,7 @@ package com.example.networds.entity.enums;
 import org.springframework.security.core.GrantedAuthority;
 
 public enum Role implements GrantedAuthority {
-    USER, ADMIN;
+    ADMIN, MANAGER, DEVELOPER, TESTER, USER;
 
     @Override
     public String getAuthority() {

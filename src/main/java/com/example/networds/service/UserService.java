@@ -16,16 +16,16 @@ import java.util.stream.Collectors;
 
 @Service
 public class UserService implements UserDetailsService {
-
     @Autowired
     private UserRepository userRepository;
-
     @Autowired
     private SmtpMailService mailSender;
-
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    public List<User> findAll() {
+        return userRepository.findAll();
+    }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -58,7 +58,7 @@ public class UserService implements UserDetailsService {
         if (!StringUtils.isEmpty(user.getEmail())){
             String message = String.format(
                     "Hello, %s! \n +" +
-                            "Welcome to NetWords, Please, visit next link: http://localhost:8080/activate/%s",
+                            "Welcome to Tesa, Please, visit next link: http://localhost:8080/activate/%s",
                     user.getUsername(),
                     user.getActivationCode()
             );
@@ -79,11 +79,6 @@ public class UserService implements UserDetailsService {
         userRepository.save(user);
 
         return true;
-    }
-
-
-    public List<User> findAll() {
-        return userRepository.findAll();
     }
 
     public void saveUser(User user, String username, Map<String, String> form) {
@@ -138,6 +133,19 @@ public class UserService implements UserDetailsService {
     public void unsubscribe(User currentUser, User user) {
         user.getSubscribers().remove(currentUser);
 
+        userRepository.save(user);
+    }
+
+    public void banUser(Long id) {
+        User user = userRepository.findById(id).orElse(null);
+        if(user != null){
+            if(user.isActive()){
+                user.setActive(false);
+            }else{
+                user.setActive(true);
+            }
+
+        }
         userRepository.save(user);
     }
 }

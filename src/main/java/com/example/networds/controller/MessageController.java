@@ -1,8 +1,7 @@
 package com.example.networds.controller;
 
-import com.example.networds.entity.Message;
+import com.example.networds.entity.Task;
 import com.example.networds.entity.User;
-import com.example.networds.entity.dto.MessageDto;
 import com.example.networds.repository.MessageRepository;
 import com.example.networds.service.MessageService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,14 +29,25 @@ import java.util.UUID;
 
 @Controller
 public class MessageController {
-    @Autowired
-    private MessageRepository messageRepository;
 
     @Autowired
     private MessageService messageService;
 
+    @Autowired
+    private MessageRepository messageRepository;
+
+    /*private final UserRepository userRepository;
+    private final MessageRepository messageRepository;
+
+    // Конструктор класса MessageController
+    public MessageController(UserRepository userRepository, MessageRepository messageRepository) {
+        this.userRepository = userRepository;
+        this.messageRepository = messageRepository;
+    }*/
+
     @Value("${upload.path}")
     private String uploadPath;
+
 
     @GetMapping("/")
     public String greeting(Map<String, Object> model) {
@@ -51,7 +61,7 @@ public class MessageController {
             Model model,
             @PageableDefault(sort = {"id"}, direction = Sort.Direction.DESC) Pageable pageable
     ) {
-        Page<Message> page;
+        Page<Task> page;
 
         page = messageService.messageList(pageable, filter);
 
@@ -65,89 +75,88 @@ public class MessageController {
     @PostMapping("/main")
     public String add(
             @AuthenticationPrincipal User user,
-            @Valid Message message,
+            @Valid Task task,
             BindingResult bindingResult,
             Model model,
             @RequestParam("file")MultipartFile file,
             @PageableDefault(sort = {"id"}, direction = Sort.Direction.DESC) Pageable pageable
     ) throws IOException {
-        message.setAuthor(user);
+        task.setAuthor(user);
 
         if(bindingResult.hasErrors()){
             Map<String, String> errorsMap = UtilsController.getErrors(bindingResult);
             model.mergeAttributes(errorsMap);
-            model.addAttribute("message", message);
+            model.addAttribute("message", task);
         }else{
-            saveFile(message, file);
+            saveFile(task, file);
 
             model.addAttribute("message", null);
 
-            messageRepository.save(message);
+            messageRepository.save(task);
 
         }
 
-        Iterable<Message> messages = messageRepository.findAll();
+        Iterable<Task> messages = messageRepository.findAll();
 
         model.addAttribute("page", messageRepository.findAll(pageable));
         model.addAttribute("url", "/main");
-        model.addAttribute("message", message);
+        model.addAttribute("message", task);
         model.addAttribute("message", null);
 
         return "main";
     }
 
-    @GetMapping("/user-messages/{user}")
+    @GetMapping("/user-tasks/{user}")
     public String userMessages(
             @AuthenticationPrincipal User currentUser,
             @PathVariable User user,
             Model model,
-            @RequestParam(required = false) Message message,
+            @RequestParam(required = false) Task task,
             @PageableDefault(sort = {"id"}, direction = Sort.Direction.DESC) Pageable pageable
 
     ) {
-        Page<Message> page = messageRepository.findAllByAuthor(user, pageable);
+        Page<Task> page = messageRepository.findAllByAuthor(user, pageable);
 
         model.addAttribute("userChannel", user);
         model.addAttribute("subscriptionsCount", user.getSubscriptions().size());
         model.addAttribute("subscribersCount", user.getSubscribers().size());
         model.addAttribute("isSubscriber", user.getSubscribers().contains(currentUser));
         model.addAttribute("page", page);
-        model.addAttribute("message", message);
+        model.addAttribute("message", task);
         model.addAttribute("isCurrentUser", currentUser.equals(user));
-        model.addAttribute("url", "/user-messages/{user}");
+        model.addAttribute("url", "/user-tasks/{user}");
 
-        return "user-messages";
+        return "user-tasks";
     }
 
-    @PostMapping("/user-messages/{user}")
+    @PostMapping("/user-tasks/{user}")
     public String updateMessage(
             @AuthenticationPrincipal User currentUser,
             @PathVariable Long user,
-            @RequestParam("id") Message message,
+            @RequestParam("task") Task task,
             @RequestParam("text") String text,
             @RequestParam("tag") String tag,
             @RequestParam("file") MultipartFile file
     ) throws IOException {
-        if (message.getAuthor().equals(currentUser)) {
+        if (task.getAuthor().equals(currentUser)) {
             if (!StringUtils.isEmpty(text)) {
-                message.setText(text);
+                task.setText(text);
             }
 
             if (!StringUtils.isEmpty(tag)) {
-                message.setTag(tag);
+                task.setTag(tag);
             }
 
-            saveFile(message, file);
+            saveFile(task, file);
 
-            messageRepository.save(message);
+            messageRepository.save(task);
         }
 
-        return "redirect:/user-messages/" + user;
+        return "redirect:/user-tasks/" + user;
     }
 
 
-
-    private void saveFile(@Valid Message message, @RequestParam("file") MultipartFile file) throws IOException {
+    private void saveFile(@Valid Task task, @RequestParam("file") MultipartFile file) throws IOException {
         if (file != null && !file.getOriginalFilename().isEmpty()) {
             File uploadDir = new File(uploadPath);
 
@@ -160,7 +169,7 @@ public class MessageController {
 
             file.transferTo(new File(uploadPath + "/" + resultFilename));
 
-            message.setFilename(resultFilename);
+            task.setFilename(resultFilename);
         }
     }
 
@@ -172,5 +181,6 @@ public class MessageController {
         messageRepository.deleteById(messageId);
         return "redirect:/user-messages/" + user;
     }
+
 
 }

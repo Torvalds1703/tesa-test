@@ -6,7 +6,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 
 @Entity
-public class Message {
+public class Task {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     @Column(name = "id")
@@ -27,10 +27,10 @@ public class Message {
     @Column(name = "filename")
     private String filename;
 
-    public Message() {
+    public Task() {
     }
 
-    public Message(String text, String tag, User user) {
+    public Task(String text, String tag, User user) {
         this.author = user;
         this.text = text;
         this.tag = tag;

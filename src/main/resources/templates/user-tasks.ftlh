@@ -21,7 +21,7 @@
             <div class="col">
                 <div class="card h-100">
                     <div class="card-body d-flex justify-content-between align-items-center">
-                        <div><h5>Subscriptions</h5></div>
+                        <div><h5>Project </h5></div>
                         <h5><a href="/user/subscriptions/${userChannel.id}/list">${subscriptionsCount}</a></h5>
                     </div>
                 </div>
@@ -29,7 +29,7 @@
             <div class="col">
                 <div class="card h-100">
                     <div class="card-body d-flex justify-content-between align-items-center">
-                        <div><h5>Subscribers</h5></div>
+                        <div><h5>Task</h5></div>
                         <h5><a href="/user/subscribers/${userChannel.id}/list">${subscribersCount}</a></h5>
                     </div>
                 </div>
@@ -38,10 +38,10 @@
     </div>
 
     <br>
-    <#if isCurrentUser && message??>
-        <#include "parts/message-edit.ftlh"/>
+    <#if isCurrentUser && task??>
+        <#include "parts/task-edit.ftlh"/>
     </#if>
 
-<#include "parts/message-list.ftlh" />
+<#include "parts/task-list.ftlh" />
 </@c.page>
 

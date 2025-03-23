@@ -1,8 +1,6 @@
 package com.example.networds.service;
 
-import com.example.networds.entity.Message;
-import com.example.networds.entity.User;
-import com.example.networds.entity.dto.MessageDto;
+import com.example.networds.entity.Task;
 import com.example.networds.repository.MessageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -14,7 +12,7 @@ public class MessageService {
     @Autowired
     private MessageRepository messageRepository;
 
-    public Page<Message> messageList(Pageable pageable, String filter) {
+    public Page<Task> messageList(Pageable pageable, String filter) {
         if (filter != null && !filter.isEmpty()) {
             return messageRepository.findByTag(filter, pageable);
         } else {
